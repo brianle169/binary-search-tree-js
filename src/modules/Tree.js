@@ -86,36 +86,32 @@ export default class Tree {
   }
 
   delete(value, root = this.#root) {
-    if (root === null) {
-      return root;
-    }
-    if (value < root.data) {
-      root.left = this.delete(value, root.left);
-    } else if (value > root.data) {
-      root.right = this.delete(value, root.right);
-    } else {
+    // Base case
+    if (root === null) return root;
+    // Recursive case
+    if (value < root.data) root.left = this.delete(value, root.left);
+    else if (value > root.data) root.right = this.delete(value, root.right);
+    else {
       // No children
-      if (!(root.left || root.right)) {
-        return null;
-      }
+      if (!(root.left || root.right)) return null;
       // Only left child
-      if (!root.right) {
-        root.data = root.left.data;
-        root.left = null;
-        return root;
-      }
+      if (!root.right) return root.left;
       // Only right child
-      if (!root.left) {
-        root.data = root.right.data;
-        root.right = null;
-        return root;
-      }
+      if (!root.left) return root.right;
       // Two children
-      let successor = this.#findSuccessor(root.right);
+      const successor = this.#findSuccessor(root.right);
       root.data = successor.data;
       root.right = this.delete(successor.data, root.right);
       return root;
     }
     return root;
+  }
+
+  find(value, root = this.#root) {
+    // Base case: if the tree is empty/value does not exist
+    if (root === null) return null;
+    // Base case: if the value is found
+    if (root.data === value) return root;
+    return this.find(value, value < root.data ? root.left : root.right);
   }
 }

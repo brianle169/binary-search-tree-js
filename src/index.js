@@ -16,3 +16,6 @@ tree.prettyPrint(tree.root);
 console.log("========Delete 87=============");
 tree.delete(87);
 tree.prettyPrint(tree.root);
+console.log("========Delete 7=============");
+tree.delete(7);
+tree.prettyPrint(tree.root);
