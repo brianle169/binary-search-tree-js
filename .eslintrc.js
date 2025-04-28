@@ -8,6 +8,7 @@ module.exports = {
   extends: ["airbnb-base", "prettier"],
   rules: {
     "no-console": "off",
+    "lines-between-class-members": "off",
   },
   parserOptions: {
     ecmaVersion: "latest",
