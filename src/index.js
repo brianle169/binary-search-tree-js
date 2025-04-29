@@ -19,3 +19,13 @@ tree.prettyPrint(tree.root);
 console.log("========Delete 7=============");
 tree.delete(7);
 tree.prettyPrint(tree.root);
+
+try {
+  tree.levelOrder((node) => {
+    if (node.data % 2 === 0) node.data *= 2;
+  });
+} catch (error) {
+  console.error("Error:", error.message);
+}
+
+tree.prettyPrint(tree.root);

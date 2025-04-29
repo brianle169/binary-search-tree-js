@@ -114,4 +114,18 @@ export default class Tree {
     if (root.data === value) return root;
     return this.find(value, value < root.data ? root.left : root.right);
   }
+
+  levelOrder(callback, q = [this.#root]) {
+    // base case
+    if (!callback) throw new Error("Callback function is required");
+    if (q.length === 0) return;
+
+    // recursive case
+    const root = q[0];
+    callback(root); // callback on the first element
+    q.shift();
+    if (root.left) q.push(root.left);
+    if (root.right) q.push(root.right);
+    this.levelOrder(callback, q);
+  }
 }
