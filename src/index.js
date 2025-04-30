@@ -59,3 +59,15 @@ try {
 console.log("========Height and Depth of 15=============");
 console.log(tree.height(15));
 console.log(tree.depth(15));
+
+console.log("==========Check Balance===========");
+tree.prettyPrint();
+tree.insert(1);
+tree.insert(3);
+tree.insert(87);
+tree.prettyPrint();
+console.log("Is balanced? - ", tree.isBalanced());
+
+console.log("==========Rebalance===========");
+tree.rebalance();
+tree.prettyPrint();

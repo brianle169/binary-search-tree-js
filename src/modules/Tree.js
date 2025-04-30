@@ -3,11 +3,9 @@ import sort from "./MergeSort";
 
 export default class Tree {
   #root;
-  #arr;
 
   constructor(arr) {
     const processedArr = this.#arrProcess(arr);
-    this.#arr = processedArr;
     this.#root = this.#buildTree(processedArr);
   }
 
@@ -31,7 +29,7 @@ export default class Tree {
     return root;
   }
 
-  prettyPrint(node, prefix = "", isLeft = true) {
+  prettyPrint(node = this.#root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
     }
@@ -65,8 +63,6 @@ export default class Tree {
 
   insert(value, root = this.#root) {
     if (root === null) {
-      this.#arr.push(value);
-      this.#arr = this.#arrProcess(this.#arr);
       return new Node(value);
     }
     if (root.data === value) {
@@ -190,5 +186,23 @@ export default class Tree {
     return (
       1 + this.depth(value, node.data < root.data ? root.left : root.right)
     );
+  }
+
+  isBalanced(root = this.#root) {
+    const left = root.left ? this.height(root.left.data) : 0;
+    const right = root.right ? this.height(root.right.data) : 0;
+    return (
+      Math.abs(left - right) < 1 &&
+      this.isBalanced(root.left) &&
+      this.isBalanced(root.right)
+    );
+  }
+
+  rebalance() {
+    const arr = [];
+    this.inOrder((node) => {
+      arr.push(node.data);
+    });
+    this.#root = this.#buildTree(arr);
   }
 }
