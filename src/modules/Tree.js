@@ -128,4 +128,53 @@ export default class Tree {
     if (root.right) q.push(root.right);
     this.levelOrder(callback, q);
   }
+
+  // Pre-order traversal: root -> left -> right
+  preOrder(callback, root = this.#root) {
+    // base case
+    if (!callback) throw new Error("Callback function is required");
+    if (root === null) return;
+
+    // recursive case
+    callback(root);
+    this.preOrder(callback, root.left);
+    this.preOrder(callback, root.right);
+  }
+
+  // In-order traversal: left -> root -> right
+  inOrder(callback, root = this.#root) {
+    // base case
+    if (!callback) throw new Error("Callback function is required");
+    if (root === null) return;
+
+    // recursive case
+    this.inOrder(callback, root.left);
+    callback(root);
+    this.inOrder(callback, root.right);
+  }
+
+  // Post-order traversal: left -> right -> root
+  postOrder(callback, root = this.#root) {
+    // base case
+    if (!callback) throw new Error("Callback function is required");
+    if (root === null) return;
+
+    // recursive case
+    this.postOrder(callback, root.left);
+    this.postOrder(callback, root.right);
+    callback(root);
+  }
+
+  height(value, root = this.find(value)) {
+    const node = root;
+    // base case
+    if (!node) return null;
+    if (!node.left && !node.right) return 0;
+
+    // recursive case
+    return Math.max(
+      1 + this.height(value, node.left),
+      1 + this.height(value, node.right),
+    );
+  }
 }

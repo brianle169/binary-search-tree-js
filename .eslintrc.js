@@ -9,6 +9,8 @@ module.exports = {
   rules: {
     "no-console": "off",
     "lines-between-class-members": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
   },
   parserOptions: {
     ecmaVersion: "latest",

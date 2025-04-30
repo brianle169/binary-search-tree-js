@@ -20,12 +20,38 @@ console.log("========Delete 7=============");
 tree.delete(7);
 tree.prettyPrint(tree.root);
 
+console.log("========BFS - Level Order=============");
 try {
   tree.levelOrder((node) => {
-    if (node.data % 2 === 0) node.data *= 2;
+    console.log(node.data);
   });
 } catch (error) {
   console.error("Error:", error.message);
 }
 
-tree.prettyPrint(tree.root);
+console.log("========DFS - Pre Order=============");
+try {
+  tree.preOrder((node) => {
+    console.log(node.data);
+  });
+} catch (error) {
+  console.error("Error:", error.message);
+}
+
+console.log("========DFS - In Order=============");
+try {
+  tree.inOrder((node) => {
+    console.log(node.data);
+  });
+} catch (error) {
+  console.error("Error:", error.message);
+}
+
+console.log("========DFS - Post Order=============");
+try {
+  tree.postOrder((node) => {
+    console.log(node.data);
+  });
+} catch (error) {
+  console.error("Error:", error.message);
+}
