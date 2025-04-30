@@ -55,3 +55,7 @@ try {
 } catch (error) {
   console.error("Error:", error.message);
 }
+
+console.log("========Height and Depth of 15=============");
+console.log(tree.height(15));
+console.log(tree.depth(15));

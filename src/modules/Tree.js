@@ -172,9 +172,23 @@ export default class Tree {
     if (!node.left && !node.right) return 0;
 
     // recursive case
+    if (!node.left) return 1 + this.height(value, node.right);
+    if (!node.right) return 1 + this.height(value, node.left);
     return Math.max(
       1 + this.height(value, node.left),
       1 + this.height(value, node.right),
+    );
+  }
+
+  depth(value, root = this.#root) {
+    const node = this.find(value);
+    // base case
+    // node doesn't exist
+    if (!node) return null;
+    if (node.data === root.data) return 0;
+    // recursive case
+    return (
+      1 + this.depth(value, node.data < root.data ? root.left : root.right)
     );
   }
 }
